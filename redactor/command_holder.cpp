@@ -37,3 +37,20 @@ Command* Command_holder::get_back() {
 	back.erase(std::prev(back.end()));
 	return a;
 }
+
+bool Command_holder::isEmpty() const
+{
+	return IsEmpty;
+};
+
+Command_holder::~Command_holder() {
+	auto it = back.begin();
+	while (it != back.end()) {
+		delete* it;
+		back.erase(it++);
+	}
+	while (!forward.empty()) {
+		delete forward.top();
+		forward.pop();
+	}
+}
